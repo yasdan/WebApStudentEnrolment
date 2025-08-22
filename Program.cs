@@ -11,10 +11,14 @@ builder.Services.AddDbContext<StudentEnrolmentContext>(options =>
 builder.Services.AddMvc();
 
 // Register repositories
+builder.Services.AddScoped<IStudent, StudentRepo>();
+builder.Services.AddScoped<ICourse, CourseRepo>();
+builder.Services.AddScoped<IEnrolments, EnrolmentRepo>();
 
+/*
 builder.Services.AddTransient<IStudent, StudentRepo>();
 builder.Services.AddTransient<ICourse, CourseRepo>();
-builder.Services.AddTransient<IEnrolments, EnrolmentRepo>();
+builder.Services.AddTransient<IEnrolments, EnrolmentRepo>();*/
 
 var app = builder.Build();
 
