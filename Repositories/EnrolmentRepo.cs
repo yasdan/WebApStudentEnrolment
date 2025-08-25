@@ -16,8 +16,14 @@ namespace WebApStudentEnrolment.Repositories
 
         public int Count { get; private set; }
 
+        public ViewModel ViewModel { get; set; }
+
         public Course? Course { get; set; } 
         public Student? Student { get; set; }
+
+        public Enrolment? Enrolment { get; set; }
+
+        public IEnumerable<Enrolment> Enrolments { get; set; }
 
        
         public async Task AddEnrolment(Enrolment enrolment)

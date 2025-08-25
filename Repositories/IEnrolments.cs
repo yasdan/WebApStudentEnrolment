@@ -9,9 +9,11 @@ namespace WebApStudentEnrolment.Repositories
          
         public Course? Course { get; set; } 
         public Student? Student { get; set; }
-      //  public IEnumerable<Enrolment> Enrolments { get; }
+
+        public Enrolment? Enrolment { get; set; }
+        public IEnumerable<Enrolment> Enrolments { get; }
         
-        
+        public ViewModel ViewModel { get; set; }
         Task AddEnrolment(Enrolment enrolment);
         Task<Enrolment> GetEnrolmentById(int enrolmentId);
         Task<IEnumerable<Enrolment>> GetAllEnrolments();

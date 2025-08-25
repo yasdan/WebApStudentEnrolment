@@ -16,6 +16,11 @@ namespace WebApStudentEnrolment.Models
 
         [Required]
         public int Credits { get; set; }
+
+        // newly added property
+        [Required]
+        [DataType(DataType.Currency)]
+        public decimal CourseFee { get; set; }
         public Course() { }
         public Course(int id, string name, string description, int credits)
         {

@@ -2,6 +2,8 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @model IEnumerable<WebApStudentEnrolment.Models.Enrolment>
+ <!--IEnumerable<WebApStudentEnrolment.Models.ViewModel>-->
+
 @{
     ViewData["Title"] = "Enrolments";
 }
@@ -9,7 +11,12 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-
+<form>
+<div class="input-group">
+        <input type="text" name="searchTerm" class="form-control" placeholder="Search tasks..." value="bycourse" />
+    <button type="submit" class="btn btn-primary">Search</button>
+</div>
+</form>
 <table class="table">
     <thead>
         <tr>

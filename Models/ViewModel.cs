@@ -5,10 +5,10 @@ namespace WebApStudentEnrolment.Models
 {
     public class ViewModel
     {
-        public List<Enrolment> Enrolments { get; set; }
-        public List<Student> students { get; set; }
+        public IEnumerable<Enrolment>? Enrolment { get; set; }
+        public IEnumerable<Student>? Student { get; set; }
 
-        public List<Course>  courses { get; set; }
+        public IEnumerable<Course>?  Course { get; set; }
 
         public  SelectList? Courselist { get; set; }
 

@@ -40,12 +40,13 @@ namespace WebApStudentEnrolment.Controllers
             }
 
             var courseenrols = new SelectList(Enrolment_Course.Distinct().ToList());
+
             var enrolementsbycourse = new ViewModel()
             {
                 
                 Courselist = courseenrols,    
-            };
-            */
+            };*/
+            
             return View(enrolments);
             //return View(enrolementsbycourse);
         }

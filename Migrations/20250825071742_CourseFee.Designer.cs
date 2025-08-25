@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApStudentEnrolment.Data;
 
@@ -11,9 +12,11 @@ using WebApStudentEnrolment.Data;
 namespace WebApStudentEnrolment.Migrations
 {
     [DbContext(typeof(StudentEnrolmentContext))]
-    partial class StudentEnrolmentContextModelSnapshot : ModelSnapshot
+    [Migration("20250825071742_CourseFee")]
+    partial class CourseFee
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
