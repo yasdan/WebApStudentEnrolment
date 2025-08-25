@@ -16,54 +16,86 @@ namespace WebApStudentEnrolment.Repositories
 
         public int Count { get; private set; }
 
+        public Course? Course { get; set; } 
+        public Student? Student { get; set; }
+
+       
         public async Task AddEnrolment(Enrolment enrolment)
         {
             // Implementation for adding an enrolment
-            await _context.Enrolments.AddAsync(enrolment);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.Enrolments.AddAsync(enrolment);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
             
         }
 
         public async Task<Enrolment> GetEnrolmentById(int enrolmentId)
         {
             // Implementation for retrieving an enrolment by ID
-           // var enrolment = await _context.Enrolments.FindAsync(enrolmentId);
-           var enrolment = await _context.Enrolments
-                .Include(e => e.Student) // Include related Student entity
-                .Include(e => e.Course)  // Include related Course entity
-                .FirstOrDefaultAsync(e => e.Id == enrolmentId);
-            if (enrolment == null)
+            try
             {
-                return null; // Return null if not found
+                // var enrolment = await _context.Enrolments.FindAsync(enrolmentId);
+                var enrolment = await _context.Enrolments
+                     .Include(e => e.Student) // Include related Student entity
+                     .Include(e => e.Course)  // Include related Course entity
+                     .FirstOrDefaultAsync(e => e.Id == enrolmentId);
+                if (enrolment == null)
+                {
+                    return null; // Return null if not found
+                }
+                return enrolment; // Return the enrolment object
             }
-            return enrolment; // Return the enrolment object
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<Enrolment>> GetAllEnrolments()
         {
             // Implementation for retrieving all enrolments
-           // var enrolments = await _context.Enrolments.ToListAsync();
-           var enrolments = await _context.Enrolments
-                .Include(e => e.Student) // Include related Student entity
-                .Include(e => e.Course)  // Include related Course entity
-                .ToListAsync();
-            return enrolments; // Return the list of enrolments
+            try
+            {
+                // var enrolments = await _context.Enrolments.ToListAsync();
+                var enrolments = await _context.Enrolments
+                     .Include(e => e.Student) // Include related Student entity
+                     .Include(e => e.Course)  // Include related Course entity
+                     .ToListAsync();
+                return enrolments; // Return the list of enrolments 
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task UpdateEnrolment(int enrolmentId, Enrolment enrolment)
         {
             // Implementation for updating an enrolment
-            var existingEnrolment = await _context.Enrolments.FindAsync(enrolmentId);
-            if (existingEnrolment == null)
+            try
             {
-                return; 
+                var existingEnrolment = await _context.Enrolments.FindAsync(enrolmentId);
+                if (existingEnrolment == null)
+                {
+                    return;
+                }
+                // Update properties as needed
+                existingEnrolment.StudentId = enrolment.StudentId;
+                existingEnrolment.CourseId = enrolment.CourseId;
+                existingEnrolment.EnrolmentDate = enrolment.EnrolmentDate;
+                _context.Enrolments.Update(existingEnrolment);
+                await _context.SaveChangesAsync();
             }
-            // Update properties as needed
-            existingEnrolment.StudentId = enrolment.StudentId;
-            existingEnrolment.CourseId = enrolment.CourseId;
-            existingEnrolment.EnrolmentDate = enrolment.EnrolmentDate;
-            _context.Enrolments.Update(existingEnrolment);
-            await _context.SaveChangesAsync();  
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
            
         }
 
@@ -71,13 +103,20 @@ namespace WebApStudentEnrolment.Repositories
         public async Task DeleteEnrolment(int enrolmentid)
         {
             // Implementation for deleting an enrolment
-            var enrolment = await _context.Enrolments.FindAsync(enrolmentid);
-            if(enrolment == null)
+            try
             {
-                return; // Return if not found
+                var enrolment = await _context.Enrolments.FindAsync(enrolmentid);
+                if (enrolment == null)
+                {
+                    return; // Return if not found
+                }
+                _context.Enrolments.Remove(enrolment);
+                await _context.SaveChangesAsync();
             }
-            _context.Enrolments.Remove(enrolment);  
-            await _context.SaveChangesAsync();
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         
         }

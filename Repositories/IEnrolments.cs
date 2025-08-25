@@ -5,8 +5,13 @@ namespace WebApStudentEnrolment.Repositories
 {
     public interface IEnrolments
     {
-        int Count { get; }
-        // Task<IActionResult> AddEnrolment(int enrolmentId, int studentId, int courseId, DateTime enrolmentDate);
+         int Count { get; }
+         
+        public Course? Course { get; set; } 
+        public Student? Student { get; set; }
+      //  public IEnumerable<Enrolment> Enrolments { get; }
+        
+        
         Task AddEnrolment(Enrolment enrolment);
         Task<Enrolment> GetEnrolmentById(int enrolmentId);
         Task<IEnumerable<Enrolment>> GetAllEnrolments();

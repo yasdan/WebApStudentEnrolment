@@ -11,9 +11,11 @@ namespace WebApStudentEnrolment.Models
         public int CourseId { get; set; }
         public DateTime EnrolmentDate { get; set; }
 
+        //Navigation properties 
         public virtual Student? Student { get; set; }
 
         public virtual Course? Course { get; set; }
+       // public IEnumerable<Enrolment> Enrolments { get; set; }
 
         public Enrolment() { }
         public Enrolment(int id, int studentId, int courseId, DateTime enrolmentDate)
